@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import '../constants.dart'; // ✅ single baseUrl
 import 'admin_login_page.dart';
+import 'admin_exam_page.dart'; // Import for exam scheduling
 
 class AdminPage extends StatefulWidget {
   @override
@@ -257,6 +258,16 @@ class _AdminPageState extends State<AdminPage> {
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.event),
+            tooltip: "Schedule Exam",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => AdminExamPage()),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             tooltip: "Admin Logout",

@@ -9,5 +9,4 @@
 //    Real Device (WiFi) → "http://192.168.x.x:3000"
 //    Web browser → "http://localhost:3000"
 
-const String baseUrl = "https://YOUR-APP-NAME.onrender.com";
-// ☝️ Replace this with your actual Render URL after deployment
+const String baseUrl = "https://btech-app-2.onrender.com";// ☝️ Replace this with your actual Render URL after deployment

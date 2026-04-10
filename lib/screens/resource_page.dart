@@ -74,7 +74,7 @@ class _ResourcePageState extends State<ResourcePage> {
   Future<void> openLink(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+      await launchUrl(uri, mode: LaunchMode.platformDefault);
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

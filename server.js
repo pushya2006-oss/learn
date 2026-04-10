@@ -180,7 +180,13 @@ app.post("/scheduleExam", adminAuth, async (req, res) => {
 
 app.get("/getExams", async (req, res) => {
   try {
-    const exams = await Exam.find().sort({ scheduledTime: 1 });
+    const { subject, year, semester } = req.query;
+    const query = {};
+    if (subject) query.subject = subject;
+    if (year) query.year = year;
+    if (semester) query.semester = semester;
+
+    const exams = await Exam.find(query).sort({ scheduledTime: 1 });
     res.json(exams);
   } catch (err) {
     res.status(500).send("Failed to fetch exams");

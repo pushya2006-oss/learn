@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'resource_page.dart';
+import 'exam_list_page.dart';
 
 class OptionsPage extends StatelessWidget {
   final String subject;
@@ -62,6 +63,32 @@ class OptionsPage extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => ResourcePage(
                       type: "external",
+                      subject: subject,
+                      year: year,
+                      semester: semester,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Card(
+            child: ListTile(
+              leading: const CircleAvatar(
+                backgroundColor: Colors.blue,
+                child: Icon(Icons.assignment, color: Colors.white),
+              ),
+              title: const Text(
+                "Examinations",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text("Attempt scheduled MCQ exams"),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ExamListPage(
                       subject: subject,
                       year: year,
                       semester: semester,
