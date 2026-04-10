@@ -77,6 +77,21 @@ const Resource = mongoose.model("Resource", {
   exam_year: String,
 });
 
+const Exam = mongoose.model("Exam", {
+  title: String,
+  year: String,
+  semester: String,
+  subject: String,
+  duration: Number,
+  scheduledTime: String,
+  totalQuestions: Number,
+  questions: [{
+    question: String,
+    options: [String],
+    correctOption: String
+  }]
+});
+
 // ================= USER AUTH ROUTES =================
 
 app.post("/register", async (req, res) => {
@@ -145,6 +160,32 @@ function adminAuth(req, res, next) {
     res.status(401).send("Invalid or expired admin token");
   }
 }
+
+// ================= EXAM ROUTES =================
+
+app.post("/scheduleExam", adminAuth, async (req, res) => {
+  try {
+    const examData = req.body;
+    if (!examData.title || !examData.questions) {
+      return res.status(400).send("Title and questions are required");
+    }
+
+    const newExam = new Exam(examData);
+    await newExam.save();
+    res.send("Exam scheduled successfully");
+  } catch (err) {
+    res.status(500).send("Failed to schedule exam: " + err.message);
+  }
+});
+
+app.get("/getExams", async (req, res) => {
+  try {
+    const exams = await Exam.find().sort({ scheduledTime: 1 });
+    res.json(exams);
+  } catch (err) {
+    res.status(500).send("Failed to fetch exams");
+  }
+});
 
 // ================= RESOURCE ROUTES =================
 
